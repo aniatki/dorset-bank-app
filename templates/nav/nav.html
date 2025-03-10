@@ -7,7 +7,7 @@
   
     <div class="navbar-end">
       <div class="navbar-item">
-        {% if request.path == '/login' %}
+        {% if request.path == '/' %}
         <a class="button is-link" href="{% url 'signup' %}">Sign Up</a>
         {% elif request.path == '/signup' %}
         <a class="button is-link" href="{% url 'login' %}">Log In</a>

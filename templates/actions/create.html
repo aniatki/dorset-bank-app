@@ -1,56 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
 <section class="section">
   <div class="container">
     <div class="box" style="max-width: 400px; margin: auto;">
       <h1 class="title is-4 has-text-centered">Sign Up</h1>
 
-      <form method="post">
-        {% csrf_token%}
+      <form>
+        {% csrf_token %}
         <!-- First Name -->
         <div class="field">
-          <label class="label" for="">First Name</label>
+          <label class="label">First Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Enter your First name" required>
+            <input class="input" type="text" placeholder="Enter your first name" required>
           </div>
         </div>
 
-        <!-- Email -->
+        <!-- Last Name -->
         <div class="field">
-          <label class="label">Email</label>
+          <label class="label">Last Name</label>
           <div class="control">
-            <input class="input" type="email" placeholder="Enter your email" required>
+            <input class="input" type="text" placeholder="Enter your last name" required>
           </div>
         </div>
 
-        <!-- Password -->
+        <!-- Address -->
         <div class="field">
-          <label class="label">Password</label>
+          <label class="label">Address</label>
           <div class="control">
-            <input class="input" type="password" placeholder="Enter your password" required>
+            <input class="input" type="text" placeholder="Enter your address" required>
           </div>
         </div>
 
-        <!-- Confirm Password -->
+        <!-- Balance -->
         <div class="field">
-          <label class="label">Confirm Password</label>
+          <label class="label">Balance</label>
           <div class="control">
-            <input class="input" type="password" placeholder="Re-enter your password" required>
+            <input class="input" type="number" placeholder="Enter your balance" required>
           </div>
         </div>
 
         <!-- Submit Button -->
         <div class="field">
           <div class="control">
-            <button type="submit" class="button is-success is-fullwidth">Sign Up</button>
+            <button class="button is-success is-fullwidth">Create</button>
           </div>
         </div>
       </form>
     </div>
   </div>
 </section>
-
 {% endblock%}

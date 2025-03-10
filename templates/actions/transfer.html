@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="box" style="max-width: 400px; margin: auto;">
+            <h1 class="title is-4 has-text-centered">Sign Up</h1>
+
+            <form>
+                {% csrf_token %}
+                <!-- Source ID -->
+                <div class="field">
+                    <label class="label">Source ID</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Enter sender id" required>
+                    </div>
+                </div>
+
+                <!-- First Name -->
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Enter your first name" required>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="field">
+                    <label class="label">Address</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Enter your address" required>
+                    </div>
+                </div>
+
+                <!-- Balance -->
+                <div class="field">
+                    <label class="label">Balance</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Enter your balance" required>
+                    </div>
+                </div>
+
+
+                <!-- Submit Button -->
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-success is-fullwidth">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock%}
