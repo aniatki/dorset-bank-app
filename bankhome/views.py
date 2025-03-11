@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from .forms import AccountForm
 
 def login(request):
     return render(request, "login/login.html")
 
 def signup(request):
-    return render(request, "signup/signup.html")
+    form = AccountForm() 
+    context = {"form": form}
+    return render(request, "signup/signup.html", context)
 
 objs = [{
         "id": 1,
