@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .forms import AccountForm
+from .models import Account
+
+users = Account.objects.all()
 
 def login(request):
     return render(request, "login/login.html")
@@ -9,15 +12,10 @@ def signup(request):
     context = {"form": form}
     return render(request, "signup/signup.html", context)
 
-
 def dashboard(request):
-    objs = Account.objects
-    return render(request, 'dashboard/dashboard.html', {"objs": objs})
+    return render(request, 'dashboard/dashboard.html', {"users": users})
 
 def read(request, pk):
-    obj = None
-    for i in objs:
-        if i['id'] == int(pk):
-            obj = i
-    context = {'o': obj}
+    user = Account.objects.get(pk=pk)
+    context = {'user': user}
     return render(request, 'read/read.html', context)

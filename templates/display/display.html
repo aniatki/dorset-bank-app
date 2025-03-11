@@ -10,13 +10,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for o in objs %}
+            {% for user in users %}
                 <tr>
-                    <td>{{ o.id }}</td>
-                    <td><a href="{% url 'read' o.id %}">{{ o.first_name }}</a></td>
-                    <td>{{ o.last_name }}</td>
-                    <td>{{ o.address }}</td>
-                    <td>{{ o.balance }}</td>
+                    <td>{{ user.id }}</td>
+                    <td><a href="{% url 'read' user.id %}">{{ user.first_name }}</a></td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.balance }}</td>
                 </tr>
             {% endfor %}
         </tbody>
