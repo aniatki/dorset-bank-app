@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .models import Account
 from .forms import AccountForm
 
 def login(request):
@@ -10,28 +9,6 @@ def signup(request):
     context = {"form": form}
     return render(request, "signup/signup.html", context)
 
-# objs = [{
-#         "id": 1,
-#         "first_name": "John",
-#         "last_name": "Sexton",
-#         "address": "12 Main Street",
-#         "balance": 8300
-#     },
-#     {
-#         "id": 2,
-#         "first_name": "Mary",
-#         "last_name": "Sexton",
-#         "address": "12 Main Street",
-#         "balance": 8300
-#     },
-#     {
-#         "id": 3,
-#         "first_name": "Jane",
-#         "last_name": "Sexton",
-#         "address": "12 Main Street",
-#         "balance": 8300
-#     }
-# ]
 
 def dashboard(request):
     objs = Account.objects
