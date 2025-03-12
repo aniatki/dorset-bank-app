@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AccountForm
+from .forms import AccountForm, CustomUserCreationForm
 from .models import Account, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 def login_view(request):
     if request.method == "POST":
-        username = request.POST.get('username')
+        username = request.POST.get('username').lower()
         password = request.POST.get('password')
 
         try:
@@ -37,11 +37,25 @@ def logout_view(request):
     return redirect("login_view")
 
 def signup_view(request):
-    form = AccountForm()
+    form = CustomUserCreationForm()
+
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            print(user)
+            user.save()
+            login(request, user)
+            messages.success(request, "Account was created successfully.")
+            return redirect('dashboard_view')
+        
+        else:
+            messages.error(request, "Something went wrong")
+
     context = {"form": form}
     return render(request, "signup/signup.html", context)
 
-# @login_required
 def dashboard_view(request):
     users = Account.objects.all()
     return render(request, 'dashboard/dashboard.html', {"users": users})
