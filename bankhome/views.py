@@ -28,7 +28,12 @@ def login_view(request):
     return render(request, "login/login.html", context)
 
 def logout_view(request):
-    logout(request)
+    try:
+        logout(request)
+        messages.success(request, "Successfully logged out.")
+    except:
+        messages.error(request, "There was an issue trying to log out.")
+    
     return redirect("login_view")
 
 def signup_view(request):
@@ -36,7 +41,7 @@ def signup_view(request):
     context = {"form": form}
     return render(request, "signup/signup.html", context)
 
-@login_required
+# @login_required
 def dashboard_view(request):
     users = Account.objects.all()
     return render(request, 'dashboard/dashboard.html', {"users": users})

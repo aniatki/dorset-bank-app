@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
 <section class="section">
   <div class="container">
     <div class="box" style="max-width: 400px; margin: auto;">
       <h1 class="title is-4 has-text-centered">Sign Up</h1>
 
-      <form>
+      <form method="POST" action="">
         {% csrf_token %}
         <!-- First Name -->
         <div class="field">
@@ -50,4 +52,9 @@
     </div>
   </div>
 </section>
+{% else %}
+
+{% include 'utils/login_required.html' %}
+
+{% endif %}
 {% endblock%}

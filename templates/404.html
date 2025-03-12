@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="mx-5" style="text-align: center;">
+    <h1 class="title mx-5">404</h1>
+    <h2 class="subtitle mx-5">The requested page at <u>{{ request.path }}</u> was not found.</h2>
+    <a class="button is-link" href="{% url 'login_view' %}">Log In</a>
+</div>
+
+{% endblock %}
