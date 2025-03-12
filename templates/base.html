@@ -26,21 +26,33 @@ i {
 
   <div class="container is-max-tablet" >
     {% include 'nav/nav.html' %}
+    
+    {% block content %}
+    {% endblock %}
 
     {% if messages %}
       {% for message in messages %}
+        {% if forloop.last %}
 
-        <article {% if message.tags %} style="width:max-content; margin-inline:auto;" class="message is-{{message.tags}}" {% endif %}>
-          <div class="message-header">
+        <article {% if message.tags %} style="width:max-content; margin-inline:auto;position:absolute; top:100px;left:0;right:0;" class="message is-{{message.tags}}" {% endif %}>
+          <div class="message-header" style="z-index: 100;box-shadow: 0 0 25px hsl(var(--bulma-message-h),var(--bulma-message-s),var(--bulma-message-header-background-l))">
             <p>{{ message }}</p>
           </div>
         </article>
+        {% endif %}
       {% endfor %}
     {% endif %}
-
-
-    {% block content %}
-    {% endblock %}
   </div>
+
+  <script>
+    setTimeout(() => {
+        var flashMessage = document.getElementsByTagName('article')[0];
+        if (flashMessage) {
+            flashMessage.style.transition = "opacity 0.5s ease-out";
+            flashMessage.style.opacity = "0";
+            setTimeout(() => flashMessage.remove(), 500);
+        }
+    }, 5000);
+</script>
 </body>
 </html>

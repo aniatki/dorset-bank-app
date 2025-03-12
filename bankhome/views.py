@@ -44,7 +44,6 @@ def signup_view(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
-            print(user)
             user.save()
             login(request, user)
             messages.success(request, "Account was created successfully.")
@@ -61,8 +60,19 @@ def dashboard_view(request):
     return render(request, 'dashboard/dashboard.html', {"users": users})
         
 
-@login_required
 def read_view(request, pk):
     user = Account.objects.get(pk=pk)
     context = {'user': user}
     return render(request, 'read/read.html', context)
+
+def create_view(request):
+    form = AccountForm()
+    if request.method == "POST":
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            account = form.save(commit=False)
+            account.save()
+            messages.success(request, "Account was created successfully.")
+            return redirect('dashboard_view')
+    context = {"form": form}
+    return render(request, 'actions/create.html', context)

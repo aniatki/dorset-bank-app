@@ -60,4 +60,4 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         """Return True if user has permissions for an app."""
-        return True 
+        return True

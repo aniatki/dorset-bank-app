@@ -6,15 +6,16 @@
 <section class="section">
   <div class="container">
     <div class="box" style="max-width: 400px; margin: auto;">
-      <h1 class="title is-4 has-text-centered">Sign Up</h1>
+      <h1 class="title is-4 has-text-centered">Create an account</h1>
 
       <form method="POST" action="">
         {% csrf_token %}
+
         <!-- First Name -->
         <div class="field">
           <label class="label">First Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Enter your first name" required>
+            <input class="input" name="first_name" id="id_first_name" type="text" placeholder="Enter your first name" required>
           </div>
         </div>
 
@@ -22,7 +23,7 @@
         <div class="field">
           <label class="label">Last Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Enter your last name" required>
+            <input class="input" name="last_name" id="id_last_name"  type="text" placeholder="Enter your last name" required>
           </div>
         </div>
 
@@ -30,7 +31,7 @@
         <div class="field">
           <label class="label">Address</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Enter your address" required>
+            <input class="input" name="address" id="id_address" type="text" placeholder="Enter your address" required>
           </div>
         </div>
 
@@ -38,7 +39,7 @@
         <div class="field">
           <label class="label">Balance</label>
           <div class="control">
-            <input class="input" type="number" placeholder="Enter your balance" required>
+            <input class="input" name="balance" id="id_balance" type="number" placeholder="Enter your balance" required>
           </div>
         </div>
 

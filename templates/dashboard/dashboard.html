@@ -7,7 +7,7 @@
 <h5 class="subtitle" style="text-align:center">Logged in as <u>{{ user.username }}</u> at {{ user.last_login }}</h2>
 <section class="fixed-grid has-3-cols">
     <div class="grid">
-        <p class="cell" style="margin-inline: auto;"><a class="button is-success">Create Account<i class="fas fa-plus"></i></a></p>
+        <p class="cell" style="margin-inline: auto;"><a class="button is-success" href="{% url 'create_view' %}">Create Account<i class="fas fa-plus"></i></a></p>
         <p class="cell" style="margin-inline: auto;"><a class="button is-danger">Delete Account<i class="fas fa-trash"></i></a></p>
         <p class="cell" style="margin-inline: auto;"><a class="button is-info">Edit Account<i class="fas fa-pen"></i></a></p>
         <p class="cell" style="margin-inline: auto;"><a class="button is-warning">Transfer Funds<i class="fas fa-arrows-alt-h"></i></a></p>
