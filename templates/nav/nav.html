@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-weight-bold is-size-" href="{% url 'login' %}">
+      <a class="navbar-item has-text-weight-bold is-size-" href="{% url 'login_view' %}">
         Dorset Bank App
       </a>
     </div>
@@ -8,9 +8,9 @@
     <div class="navbar-end">
       <div class="navbar-item">
         {% if request.path == '/' %}
-        <a class="button is-link" href="{% url 'signup' %}">Sign Up</a>
+        <a class="button is-link" href="{% url 'signup_view' %}">Sign Up</a>
         {% elif request.path == '/signup' %}
-        <a class="button is-link" href="{% url 'login' %}">Log In</a>
+        <a class="button is-link" href="{% url 'login_view' %}">Log In</a>
         {% endif %}
       </div>
     </div>

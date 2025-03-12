@@ -27,6 +27,18 @@ i {
   <div class="container">
     {% include 'nav/nav.html' %}
 
+    {% if messages %}
+      {% for message in messages %}
+
+        <article {% if message.tags %} style="width:max-content; margin-inline:auto;" class="message is-{{message.tags}}" {% endif %}>
+          <div class="message-header">
+            <p>{{ message }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    {% endif %}
+
+
     {% block content %}
     {% endblock %}
 

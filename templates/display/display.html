@@ -13,7 +13,7 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td><a href="{% url 'read' user.id %}">{{ user.first_name }}</a></td>
+                    <td><a href="{% url 'read_view' user.id %}">{{ user.first_name }}</a></td>
                     <td>{{ user.last_name }}</td>
                     <td>{{ user.address }}</td>
                     <td>{{ user.balance }}</td>
