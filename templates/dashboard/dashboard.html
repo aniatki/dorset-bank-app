@@ -9,7 +9,9 @@
     <p class="cell"><a class="button is-warning">Withdraw Funds<i class="fas fa-angle-double-down"></i></a></p>
     <p class="cell"><a class="button is-success">Deposit Funds<i class="fas fa-angle-double-up"></i></a></p>
     <p class="cell"><a class="button is-info">View Transactions<i class="fas fa-chart-line"></i></a></p>
-    <p class="cell is-col-start-1"><a class="button is-danger">Exit<i class="fas fa-sign-out-alt"></i></a></p>
+    {% if request.user.is_authenticated %}
+    <p class="cell is-col-start-1"><a class="button is-danger" href="{% url 'logout' %}">Exit<i class="fas fa-sign-out-alt"></i></a></p>
+    {% endif %}
 </section>
 {% include 'display/display.html' %}
 
