@@ -10,13 +10,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for user in users %}
+            {% for account in accounts %}
                 <tr>
-                    <td>{{ user.id }}</td>
-                    <td><a href="{% url 'read_view' user.id %}">{{ user.first_name }}</a></td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.address }}</td>
-                    <td>{{ user.balance }}</td>
+                    <td>{{ account.id }}</td>
+                    <td><a href="{% url 'read_view' account.id %}">{{ account.first_name }}</a></td>
+                    <td>{{ account.last_name }}</td>
+                    <td>{{ account.address }}</td>
+                    <td>{{ account.balance }}</td>
+                    <td><a class="button is-danger" href="{% url 'delete_view' account.id %}">Delete Account<i class="fas fa-trash"></i></a></td>
                 </tr>
             {% endfor %}
         </tbody>

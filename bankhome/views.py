@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import AccountForm, CustomUserCreationForm
 from .models import Account, User
 from django.contrib import messages
@@ -41,6 +41,7 @@ def signup_view(request):
 
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
+
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -56,13 +57,13 @@ def signup_view(request):
     return render(request, "signup/signup.html", context)
 
 def dashboard_view(request):
-    users = Account.objects.all()
-    return render(request, 'dashboard/dashboard.html', {"users": users})
+    accounts = Account.objects.all()
+    return render(request, 'dashboard/dashboard.html', {"accounts": accounts})
         
 
 def read_view(request, pk):
-    user = Account.objects.get(pk=pk)
-    context = {'user': user}
+    account = Account.objects.get(pk=pk)
+    context = {'account': account}
     return render(request, 'read/read.html', context)
 
 def create_view(request):
@@ -76,3 +77,14 @@ def create_view(request):
             return redirect('dashboard_view')
     context = {"form": form}
     return render(request, 'actions/create.html', context)
+
+def edit_view(request, pk):
+    form = Account.objects.get(pk=pk)
+    context = {"form":form}
+    return render(request, 'actions/edit.html', context)
+
+def delete_view(request, pk):
+    account = get_object_or_404(Account, id=pk)
+    account.delete()
+    messages.success(request, f"Entry {account.first_name, account.last_name} was deleted from the database.")
+    return redirect('dashboard_view')
