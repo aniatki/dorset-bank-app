@@ -95,7 +95,7 @@ def edit_view(request, pk):
 def delete_view(request, pk):
     account = get_object_or_404(Account, id=pk)
     account.delete()
-    messages.success(request, f"Entry {account.first_name, account.last_name} was deleted from the database.")
+    messages.success(request, f"{account.first_name} was deleted from the database.")
     return redirect('dashboard_view')
 
 def transfer_view(request):
