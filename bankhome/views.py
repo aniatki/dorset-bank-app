@@ -57,7 +57,7 @@ def signup_view(request):
     return render(request, "signup/signup.html", context)
 
 def dashboard_view(request):
-    accounts = Account.objects.all()
+    accounts = Account.objects.all().order_by('-updated')
     return render(request, 'dashboard/dashboard.html', {"accounts": accounts})
         
 
@@ -79,8 +79,17 @@ def create_view(request):
     return render(request, 'actions/create.html', context)
 
 def edit_view(request, pk):
-    form = Account.objects.get(pk=pk)
-    context = {"form":form}
+    account = Account.objects.get(pk=pk)
+    form = AccountForm(instance=account)
+
+    if request.method == 'POST':
+        form = AccountForm(request.POST, instance=account)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Entry was updated.")
+            return redirect('dashboard_view')
+
+    context = {"account":account}
     return render(request, 'actions/edit.html', context)
 
 def delete_view(request, pk):
