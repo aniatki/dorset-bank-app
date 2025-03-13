@@ -18,7 +18,6 @@ class Account(models.Model):
     
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
-        """Creates and returns a regular user."""
         if not username:
             raise ValueError("The Username field is required")
         
@@ -28,7 +27,6 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, password=None):
-        """Creates and returns a superuser."""
         user = self.create_user(username, password)
         user.is_superuser = True
         user.is_staff = True
@@ -36,7 +34,6 @@ class UserManager(BaseUserManager):
         return user
 
     def get_by_natural_key(self, username):
-        """Required for Django authentication to work correctly."""
         return self.get(username=username)
 
 class User(AbstractBaseUser):
@@ -55,9 +52,39 @@ class User(AbstractBaseUser):
         return self.username
     
     def has_perm(self, perm, obj=None):
-        """Return True if user has a specific permission."""
         return True 
 
     def has_module_perms(self, app_label):
-        """Return True if user has permissions for an app."""
         return True
+    
+class Transaction(models.Model):
+    id=models.AutoField(primary_key=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    from_id = models.ForeignKey('Account', on_delete=models.CASCADE, related_name='sent_transactions')
+    from_new_balance = models.DecimalField(max_digits=10, decimal_places=2)
+    to_id = models.ForeignKey('Account', on_delete=models.CASCADE, related_name='received_transactions')
+    to_new_balance = models.DecimalField(max_digits=10, decimal_places=2)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Transaction {self.id}: {self.from_id} -> {self.to_id} ({self.amount})"
+
+    def save(self, *args, **kwargs):
+        from_account = self.from_id
+        to_account = self.to_id
+        
+        if from_account.balance < self.amount:
+            raise ValueError("Insufficient funds")
+        
+        self.from_new_balance = from_account.balance - self.amount
+        self.to_new_balance = to_account.balance + self.amount
+        
+        super().save(*args, **kwargs)
+        
+        from_account.balance = self.from_new_balance
+        to_account.balance = self.to_new_balance
+        from_account.save(update_fields=['balance'])
+        to_account.save(update_fields=['balance'])
+
+    def __str__(self):
+        return f"Transaction {self.id}: {self.from_id} -> {self.to_id} ({self.amount})"

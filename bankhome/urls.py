@@ -11,4 +11,5 @@ urlpatterns = [
     path('create/', views.create_view, name='create_view'),
     path('read/<str:pk>', views.read_view, name='read_view'),
     path('edit/<str:pk>', views.edit_view, name='edit_view'),
+    path('transfer/', views.transfer_view, name='transfer_view'),
 ]

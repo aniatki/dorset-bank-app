@@ -5,14 +5,14 @@
 {% if user.is_authenticated %}
 
 <h5 class="subtitle" style="text-align:center">Logged in as <u>{{ user.username }}</u> at {{ user.last_login }}</h2>
-<section class="fixed-grid has-3-cols">
-    <div class="grid">
-        <p class="cell" style="margin-inline: auto;"><a class="button is-success" href="{% url 'create_view' %}">Create Account<i class="fas fa-plus"></i></a></p>
-        <p class="cell" style="margin-inline: auto;"><a class="button is-warning">Transfer Funds<i class="fas fa-arrows-alt-h"></i></a></p>
-        <p class="cell" style="margin-inline: auto;"><a class="button is-warning">Withdraw Funds<i class="fas fa-angle-double-down"></i></a></p>
-        <p class="cell" style="margin-inline: auto;"><a class="button is-success">Deposit Funds<i class="fas fa-angle-double-up"></i></a></p>
-        <p class="cell" style="margin-inline: auto;"><a class="button is-info">View Transactions<i class="fas fa-chart-line"></i></a></p>
-        <p class="cell" style="margin-inline: auto;"><a class="button is-danger" href="{% url 'logout' %}">Exit<i class="fas fa-sign-out-alt"></i></a></p>
+<section>
+    <div class="grid container is-max-tablet" style="display:flex; flex-wrap: wrap;">
+        <p style="margin-inline: auto;"><a class="button is-success" href="{% url 'create_view' %}">Create Account<i class="fas fa-plus"></i></a></p>
+        <p style="margin-inline: auto;"><a class="button is-warning" href="{% url 'transfer_view' %}">Transfer Funds<i class="fas fa-arrows-alt-h"></i></a></p>
+        <p style="margin-inline: auto;"><a class="button is-warning">Withdraw Funds<i class="fas fa-angle-double-down"></i></a></p>
+        <p style="margin-inline: auto;"><a class="button is-success">Deposit Funds<i class="fas fa-angle-double-up"></i></a></p>
+        <p style="margin-inline: auto;"><a class="button is-info">View Transactions<i class="fas fa-chart-line"></i></a></p>
+        <p style="margin-inline: auto;"><a class="button is-danger" href="{% url 'logout' %}">Exit<i class="fas fa-sign-out-alt"></i></a></p>
     </div>
 </section>
 {% include 'display/display.html' %}

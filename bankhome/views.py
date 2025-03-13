@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import AccountForm, CustomUserCreationForm
-from .models import Account, User
+from .forms import AccountForm, CustomUserCreationForm, TransactionForm
+from .models import Account, User, Transaction
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from decimal import Decimal
 
 def login_view(request):
     if request.method == "POST":
@@ -97,3 +97,36 @@ def delete_view(request, pk):
     account.delete()
     messages.success(request, f"Entry {account.first_name, account.last_name} was deleted from the database.")
     return redirect('dashboard_view')
+
+def transfer_view(request):
+    form = TransactionForm()
+    if request.method == "POST":
+        amount = request.POST.get('amount')
+        from_id = request.POST.get('from_id')
+        to_id = request.POST.get('to_id')
+
+        if not all([amount, from_id, to_id]):
+            messages.error(request, "Please, complete all the fields.")
+
+        try:
+            amount = Decimal(amount)
+            from_account = Account.objects.get(id=from_id)
+            to_account = Account.objects.get(id=to_id)
+
+            if from_account.balance < amount:
+                messages.error(request, "Insufficient funds")
+
+            transaction = Transaction(
+                amount=amount,
+                from_id=from_account,
+                to_id=to_account,
+            )
+            transaction.save()
+            messages.success(request, "Transaction completed.")
+            return redirect('dashboard_view')
+
+        except Account.DoesNotExist:
+            messages.error(request, "Invalid transaction")
+            return redirect('transfer_view')
+        
+    return render(request, 'actions/transfer.html', {"form": form})
