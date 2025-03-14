@@ -9,7 +9,7 @@
       <div class="navbar-item">
         {% if request.path == '/' %}
         <a class="button is-link" href="{% url 'signup_view' %}">Sign Up</a>
-        {% elif request.path == '/signup' %}
+        {% elif request.path == '/signup/' %}
         <a class="button is-link" href="{% url 'login_view' %}">Log In</a>
         {% endif %}
       </div>

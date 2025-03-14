@@ -9,9 +9,9 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name="dashboard_view"),
     path('delete/<str:pk>', views.delete_view, name='delete_view'),
     path('create/', views.create_view, name='create_view'),
-    path('read/<str:pk>', views.read_view, name='read_view'),
     path('edit/<str:pk>', views.edit_view, name='edit_view'),
     path('transfer/', views.transfer_view, name='transfer_view'),
     path('deposit/', views.deposit_view, name='deposit_view'),
     path('withdrawal/', views.withdrawal_view, name='withdrawal_view'),
+    path('view_transactions/', views.view_transactions, name='view_transactions'),
 ]

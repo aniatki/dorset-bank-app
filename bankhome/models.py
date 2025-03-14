@@ -57,17 +57,17 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
     
-class Transaction(models.Model):
+class Transfer(models.Model):
     id=models.AutoField(primary_key=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    from_id = models.ForeignKey('Account', on_delete=models.CASCADE, related_name='sent_transactions')
+    from_id = models.ForeignKey('Account', on_delete=models.CASCADE, related_name='sent_transfers')
     from_new_balance = models.DecimalField(max_digits=10, decimal_places=2)
-    to_id = models.ForeignKey('Account', on_delete=models.CASCADE, related_name='received_transactions', default='')
+    to_id = models.ForeignKey('Account', on_delete=models.CASCADE, related_name='received_transfers', default='')
     to_new_balance = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Transaction {self.id}: {self.from_id} -> {self.to_id} ({self.amount})"
+        return f"Transfer {self.id}: {self.from_id} -> {self.to_id} ({self.amount})"
 
     def save(self, *args, **kwargs):
         from_account = self.from_id

@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import AccountForm, CustomUserCreationForm, TransactionForm, DepositForm, WithdrawalForm
-from .models import Account, User, Transaction
+from .forms import AccountForm, CustomUserCreationForm, TransferForm, DepositForm, WithdrawalForm
+from .models import Account, User, Withdrawal, Transfer, Deposit, TransactionLog
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from decimal import Decimal
@@ -61,10 +61,10 @@ def dashboard_view(request):
     return render(request, 'dashboard/dashboard.html', {"accounts": accounts})
         
 
-def read_view(request, pk):
-    account = Account.objects.get(pk=pk)
-    context = {'account': account}
-    return render(request, 'read/read.html', context)
+def view_transactions(request):
+    transaction_log = TransactionLog.objects.all().order_by('-timestamp')
+    context = {'transaction_log': transaction_log}
+    return render(request, 'actions/view_transactions.html', context)
 
 def create_view(request):
     form = AccountForm()
@@ -99,7 +99,7 @@ def delete_view(request, pk):
     return redirect('dashboard_view')
 
 def transfer_view(request):
-    form = TransactionForm()
+    form = TransferForm()
     if request.method == "POST":
         amount = request.POST.get('amount')
         from_id = request.POST.get('from_id')
@@ -116,7 +116,7 @@ def transfer_view(request):
             if from_account.balance < amount:
                 messages.error(request, "Insufficient funds")
 
-            transaction = Transaction(
+            transaction = Transfer(
                 amount=amount,
                 from_id=from_account,
                 to_id=to_account,
@@ -144,21 +144,16 @@ def deposit_view(request):
             amount = Decimal(amount)
             from_account = Account.objects.get(id=from_id)
 
-            transaction = Transaction(
+            deposit = Deposit(
                 amount=amount,
                 from_id=from_account,
-                # to_id=from_account,
             )
-            print(transaction.amount)
-            print(transaction.from_id)
-            print(transaction)
-
-            transaction.save()
+            deposit.save()
             messages.success(request, f"Deposit of {amount} completed.")
             return redirect('dashboard_view')
 
         except:
-            messages.error(request, "Invalid transaction")
+            messages.error(request, "Invalid deposit")
             return redirect('deposit_view')
     return render(request, 'actions/deposit.html', {"form":form})
 
@@ -178,17 +173,15 @@ def withdrawal_view(request):
             if from_account.balance < amount:
                 messages.error(request, "Insufficient funds")
 
-            transaction = Transaction(
+            withdrawal = Withdrawal(
                 amount=amount,
                 from_id=from_account,
-                to_id=from_account,
             )
-            print(transaction)
-            transaction.save()
+            withdrawal.save()
             messages.success(request, f"Withdrawal of {amount} completed.")
             return redirect('dashboard_view')
 
         except:
-            messages.error(request, "Invalid transaction")
-            return redirect('withdrawal_view')
+            messages.error(request, "Something went wrong")
+            return redirect('dashboard_view')
     return render(request, 'actions/withdraw.html', {"form":form})

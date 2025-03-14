@@ -16,7 +16,7 @@
                 <tr>
                     <td><p class="cell" style="margin-inline: auto;"><a class="button is-info" href="{% url 'edit_view' account.id %}">Edit<i class="fas fa-pen"></i></a></p></td>
                     <td>{{ account.id }}</td>
-                    <td><a href="{% url 'read_view' account.id %}">{{ account.first_name }}</a></td>
+                    <td>{{ account.first_name }}</td>
                     <td>{{ account.last_name }}</td>
                     <td>{{ account.address }}</td>
                     <td>{{ account.balance }}</td>
