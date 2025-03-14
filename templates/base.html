@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorset Bank App</title>
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dorset Bank App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
   .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
 
-i {
-  margin-inline:.25rem;
-}
-
+  i {
+    margin-inline: .25rem;
+  }
 </style>
+
 <body>
 
   <div class="container">
     {% include 'nav/nav.html' %}
-    
+
     {% block content %}
     {% endblock %}
 
     {% if messages %}
-      {% for message in messages %}
-        {% if forloop.last %}
+    {% for message in messages %}
+    {% if forloop.last %}
 
-        <article {% if message.tags %} style="width:max-content; margin-inline:auto;position:absolute; top:100px;left:0;right:0;" class="message is-{{message.tags}}" {% endif %}>
-          <div class="message-header" style="z-index: 100;box-shadow: 0 0 25px hsl(var(--bulma-message-h),var(--bulma-message-s),var(--bulma-message-header-background-l))">
-            <p>{{ message }}</p>
-          </div>
-        </article>
-        {% endif %}
-      {% endfor %}
+    <article {% if message.tags %}
+      style="width:max-content; margin-inline:auto;position:absolute; top:100px;left:0;right:0;"
+      class="message is-{{message.tags}}" {% endif %}>
+      <div class="message-header"
+        style="z-index: 100;box-shadow: 0 0 25px hsl(var(--bulma-message-h),var(--bulma-message-s),var(--bulma-message-header-background-l))">
+        <p>{{ message }}</p>
+      </div>
+    </article>
+    {% endif %}
+    {% endfor %}
     {% endif %}
   </div>
 
+  <footer class="footer mt-4">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Dorset Bank</strong> by <a href="https://atki.ie/" target="_blank">Hasan Atki</a>.
+        The code is open source, available on
+        <a href="https://github.com/aniatki/dorset-bank-app" target="_blank">GitHub</a>.
+      </p>
+    </div>
+  </footer>
+
   <script>
     setTimeout(() => {
-        var flashMessage = document.getElementsByTagName('article')[0];
-        if (flashMessage) {
-            flashMessage.style.transition = "opacity 0.5s ease-out";
-            flashMessage.style.opacity = "0";
-            setTimeout(() => flashMessage.remove(), 500);
-        }
+      var flashMessage = document.getElementsByTagName('article')[0];
+      if (flashMessage) {
+        flashMessage.style.transition = "opacity 0.5s ease-out";
+        flashMessage.style.opacity = "0";
+        setTimeout(() => flashMessage.remove(), 500);
+      }
     }, 5000);
-</script>
+  </script>
 </body>
+
 </html>

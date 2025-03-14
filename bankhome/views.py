@@ -58,8 +58,7 @@ def signup_view(request):
 
 def dashboard_view(request):
     accounts = Account.objects.all().order_by('-updated')
-    return render(request, 'dashboard/dashboard.html', {"accounts": accounts})
-        
+    return render(request, 'dashboard/dashboard.html', {"accounts": accounts}) 
 
 def view_transactions(request):
     transaction_log = TransactionLog.objects.all().order_by('-timestamp')
@@ -100,6 +99,7 @@ def delete_view(request, pk):
 
 def transfer_view(request):
     form = TransferForm()
+    accounts = Account.objects.all()
     if request.method == "POST":
         amount = request.POST.get('amount')
         from_id = request.POST.get('from_id')
@@ -129,7 +129,7 @@ def transfer_view(request):
             messages.error(request, "Invalid transaction")
             return redirect('transfer_view')
         
-    return render(request, 'actions/transfer.html', {"form": form})
+    return render(request, 'actions/transfer.html', {"form": form, "accounts":accounts})
 
 def deposit_view(request):
     form = DepositForm()
@@ -159,7 +159,9 @@ def deposit_view(request):
     return render(request, 'actions/deposit.html', {"form":form, "accounts": accounts})
 
 def withdrawal_view(request):
-    form = DepositForm()
+    form = WithdrawalForm()
+    accounts = Account.objects.all()
+
     if request.method == "POST":
         amount = request.POST.get('amount')
         from_id = request.POST.get('from_id')
@@ -182,7 +184,7 @@ def withdrawal_view(request):
             messages.success(request, f"Withdrawal of {amount} completed.")
             return redirect('dashboard_view')
 
-        except:
-            messages.error(request, "Something went wrong")
+        except ValueError:
+            messages.error(request, "Insufficient funds.")
             return redirect('dashboard_view')
-    return render(request, 'actions/withdraw.html', {"form":form})
+    return render(request, 'actions/withdraw.html', {"form":form, "accounts":accounts})

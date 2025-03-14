@@ -3,10 +3,13 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+
+<a class="button is-link mx-5" href="{% url 'dashboard_view' %}"><i class="fa-solid fa-arrow-left"></i>Go back to dashboard</a>
+
 <section class="section">
   <div class="container">
     <div class="box" style="max-width: 400px; margin: auto;">
-      <h1 class="title is-4 has-text-centered">Create an account</h1>
+      <h1 class="title is-4 has-text-centered">Update account</h1>
 
       <form method="POST" action="">
         {% csrf_token %}
@@ -15,7 +18,30 @@
         <div class="field">
           <label class="label">First Name</label>
           <div class="control">
-            <input value="{{ account.first_name }}" class="input" name="from_id" id="id_from_id" type="text" placeholder="Enter your account name" required>
+            <input value="{{ account.first_name }}" class="input" name="first_name" id="id_first_name" type="text" required>
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="field">
+          <label class="label">Last Name</label>
+          <div class="control">
+            <input value="{{ account.last_name }}" class="input" name="last_name" id="id_last_name" type="text" required>
+          </div>
+        </div>
+        
+        <!-- Balance -->
+        <div class="field is-disabled">
+          <label class="label">Balance</label>
+          <div class="control">
+            <input value="{{ account.balance }}" readonly class="input" name="balance" id="id_balance" type="nu" required>
+          </div>
+        </div>
+        <!-- ID -->
+        <div class="field is-disabled">
+          <label class="label">ID</label>
+          <div class="control">
+            <input value="{{ account.id }}" readonly class="input" name="from_id" id="id_from_id" type="text" required>
           </div>
         </div>
 

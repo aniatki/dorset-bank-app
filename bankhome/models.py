@@ -111,7 +111,11 @@ class Withdrawal(models.Model):
     def save(self, *args, **kwargs):
         from_account = self.from_id
         previous_balance = from_account.balance
-        self.from_new_balance = previous_balance - self.amount
+
+        if self.amount < from_account.balance:
+            self.from_new_balance = previous_balance - self.amount
+        else:
+            raise ValueError("Insufficient funds.")
 
         super().save(*args, **kwargs)
 
