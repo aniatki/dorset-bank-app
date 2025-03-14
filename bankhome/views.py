@@ -133,6 +133,7 @@ def transfer_view(request):
 
 def deposit_view(request):
     form = DepositForm()
+    accounts = Account.objects.all()
     if request.method == "POST":
         amount = request.POST.get('amount')
         from_id = request.POST.get('from_id')
@@ -155,7 +156,7 @@ def deposit_view(request):
         except:
             messages.error(request, "Invalid deposit")
             return redirect('deposit_view')
-    return render(request, 'actions/deposit.html', {"form":form})
+    return render(request, 'actions/deposit.html', {"form":form, "accounts": accounts})
 
 def withdrawal_view(request):
     form = DepositForm()

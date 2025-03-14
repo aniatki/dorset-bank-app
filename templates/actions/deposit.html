@@ -3,19 +3,45 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+<a class="button is-link mx-5" href="{% url 'dashboard_view' %}"><i class="fa-solid fa-arrow-left"></i>Go back to dashboard</a>
+
 <section class="section">
     <div class="container">
         <div class="box" style="max-width: 400px; margin: auto;">
             <h1 class="title is-4 has-text-centered">Deposit</h1>
             <form action="" method="POST">
                 {% csrf_token %}
-                
-                {{ form }}
+
+                <!-- Amount -->
+                <div class="field">
+                    <label class="label">Amount</label>
+                    <div class="control">
+                        <input class="input" name="amount" id="id_amount"
+                            type="text" placeholder="Enter your amount" required>
+                    </div>
+                </div>
+
+                <!-- Deposit account -->
+                <div class="field">
+                    <label class="label">Deposit Account</label>
+                    <div class="control">
+                        <select name="from_id" required="" id="id_from_id">
+                            {% if accounts %}
+                            <option selected="">Select an account</option>
+                            {% for account in accounts %}
+                            <option value="{{ account.id }}">{{ account.first_name }} {{ account.last_name }}</option>
+                            {% endfor %}
+                            {% else %}
+                            <option>There are no accounts to select.</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
 
                 <!-- Submit Button -->
                 <div class="field">
                     <div class="control">
-                        <button class="button is-success is-fullwidth">Submit</button>
+                        <button class="button is-success is-fullwidth">Deposit</button>
                     </div>
                 </div>
             </form>
