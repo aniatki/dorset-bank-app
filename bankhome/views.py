@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import AccountForm, CustomUserCreationForm, TransactionForm
+from .forms import AccountForm, CustomUserCreationForm, TransactionForm, DepositForm, WithdrawalForm
 from .models import Account, User, Transaction
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -125,8 +125,70 @@ def transfer_view(request):
             messages.success(request, "Transaction completed.")
             return redirect('dashboard_view')
 
-        except Account.DoesNotExist:
+        except:
             messages.error(request, "Invalid transaction")
             return redirect('transfer_view')
         
     return render(request, 'actions/transfer.html', {"form": form})
+
+def deposit_view(request):
+    form = DepositForm()
+    if request.method == "POST":
+        amount = request.POST.get('amount')
+        from_id = request.POST.get('from_id')
+
+        if not all([amount, from_id]):
+            messages.error(request, "Please, complete all the fields.")
+
+        try:
+            amount = Decimal(amount)
+            from_account = Account.objects.get(id=from_id)
+
+            transaction = Transaction(
+                amount=amount,
+                from_id=from_account,
+                # to_id=from_account,
+            )
+            print(transaction.amount)
+            print(transaction.from_id)
+            print(transaction)
+
+            transaction.save()
+            messages.success(request, f"Deposit of {amount} completed.")
+            return redirect('dashboard_view')
+
+        except:
+            messages.error(request, "Invalid transaction")
+            return redirect('deposit_view')
+    return render(request, 'actions/deposit.html', {"form":form})
+
+def withdrawal_view(request):
+    form = DepositForm()
+    if request.method == "POST":
+        amount = request.POST.get('amount')
+        from_id = request.POST.get('from_id')
+
+        if not all([amount, from_id]):
+            messages.error(request, "Please, complete all the fields.")
+
+        try:
+            amount = Decimal(amount)
+            from_account = Account.objects.get(id=from_id)
+
+            if from_account.balance < amount:
+                messages.error(request, "Insufficient funds")
+
+            transaction = Transaction(
+                amount=amount,
+                from_id=from_account,
+                to_id=from_account,
+            )
+            print(transaction)
+            transaction.save()
+            messages.success(request, f"Withdrawal of {amount} completed.")
+            return redirect('dashboard_view')
+
+        except:
+            messages.error(request, "Invalid transaction")
+            return redirect('withdrawal_view')
+    return render(request, 'actions/withdraw.html', {"form":form})

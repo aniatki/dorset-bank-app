@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Account, User, Transaction
+from .models import Account, User, Transaction, Deposit, Withdrawal
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
@@ -25,3 +25,13 @@ class TransactionForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['amount', 'from_id', 'to_id']
+
+class DepositForm(ModelForm):
+    class Meta:
+        model = Deposit
+        fields = ['amount', 'from_id']
+
+class WithdrawalForm(ModelForm):
+    class Meta:
+        model = Withdrawal
+        fields = ['amount', 'from_id']

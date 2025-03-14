@@ -12,4 +12,6 @@ urlpatterns = [
     path('read/<str:pk>', views.read_view, name='read_view'),
     path('edit/<str:pk>', views.edit_view, name='edit_view'),
     path('transfer/', views.transfer_view, name='transfer_view'),
+    path('deposit/', views.deposit_view, name='deposit_view'),
+    path('withdrawal/', views.withdrawal_view, name='withdrawal_view'),
 ]
