@@ -2,16 +2,18 @@
 
 |Task Description|Marks|
 |----------------|-----|
-|Explain what a constructor is and when it is used in Python programming language? (5 marks) And give an example in code of this. (5 marks)|10 Marks|
+|**Explain what a constructor is and when it is used in Python programming language? (5 marks) And give an example in code of this. (5 marks)**|10 Marks|
 |A constructor is the initialising function of a class, called ```__init__()```. This function creates an instance of the object with the parameters specified upon invokation. It takes in a number of arguments ```(self, *args, **kwargs)```.||
-|```class Animal:
+|```
+class Animal:
       def __init__(self, name, colour):
         self.name = name
-        self.colour = colour```||
-|When is inheritance used in OOP in Python? (6 marks) And give a code example (4 marks)|10 Marks|
-|Define polymorphism (6 marks) and give a code example. (4 marks)|10 Marks|
-|What is a structural pattern in Python. (6 marks) And give an example of the adaptor and decorator. (4 marks)|10 Marks|
-|Define a name error in Python. (5 marks). Give a code example of a name error. (5 marks)|10 Marks|
+        self.colour = colour
+```||
+|**When is inheritance used in OOP in Python? (6 marks) And give a code example (4 marks)**|10 Marks|
+|**Define polymorphism (6 marks) and give a code example. (4 marks)**|10 Marks|
+|**What is a structural pattern in Python. (6 marks) And give an example of the adaptor and decorator. (4 marks)**|10 Marks|
+|**Define a name error in Python. (5 marks). Give a code example of a name error. (5 marks)**|10 Marks|
 |**Total:**|**100%**|
 
 
