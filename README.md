@@ -2,12 +2,29 @@
 
 |Task Description|Marks|
 |----------------|-----|
-|Explain what a constructor is and when it is used in Python programming language? (5 marks) And give an example in code of this. (5 marks)|10 Marks|
-|When is inheritance used in OOP in Python? (6 marks) And give a code example (4 marks)|10 Marks|
-|Define polymorphism (6 marks) and give a code example. (4 marks)|10 Marks|
-|What is a structural pattern in Python. (6 marks) And give an example of the adaptor and decorator. (4 marks)|10 Marks|
-|Define a name error in Python. (5 marks). Give a code example of a name error. (5 marks)|10 Marks|
+|**Explain what a constructor is and when it is used in Python programming language? (5 marks) And give an example in code of this. (5 marks)**|10 Marks|
+|A constructor is the initialising function of a class, called ```__init__()```. This function creates an instance of the object with the parameters specified upon invokation. It takes in a number of arguments ```(self, *args, **kwargs)```.||
+|
+```
+class Animal:
+    def __init__(self, name, colour):
+        self.name = name
+        self.colour = colour
+
+dog = Animal("Buck", "Black") # creating a "dog" object from the "Animal" class
+print(dog) # Buck Black
+```
+
+|Task Description|Marks|
+|----------------|-----|
+|**When is inheritance used in OOP in Python? (6 marks) And give a code example (4 marks)**|10 Marks|
+|Inheritance is used when a class shares properties with another class||
+|**Define polymorphism (6 marks) and give a code example. (4 marks)**|10 Marks|
+|**What is a structural pattern in Python. (6 marks) And give an example of the adaptor and decorator. (4 marks)**|10 Marks|
+|**Define a name error in Python. (5 marks). Give a code example of a name error. (5 marks)**|10 Marks|
 |**Total:**|**100%**|
+
+
 
 # Section 2
 
@@ -19,16 +36,16 @@ You can then add as many Python files as required in your project. And as many c
 |-----------|------------|
 |REQ1|The desktop application must be built using Python VSC with a MySQL backend. In addition you will need to create three tables in MySQL – one for account data and one for the transactions one for login details. You will need to import the MySQL connector to your new project.|
 |REQ2|When the application is launched, a user must be presented with a log in screen similar to that outlined in Figure 1 below.|
-|REQ3|In order to ensure appropriate use of the application only internal staff maybe allowed use this software. As a result a user must login to the application. Figure 1 shows the desired layout of the login screen. The username and password can be displayed in clear text. ![figure 1](https://readmeimages--euw1-az3--x-s3.s3express-euw1-az3.eu-west-1.amazonaws.com/figure_1.png) Figure 1 is shown when a user runs the program. If the user enters an incorrect username and/or password a message should appear informing them so. You will also need to add an input mask for the password so that asterisks replace the numbers or characters of the password when typed.|
+|REQ3|In order to ensure appropriate use of the application only internal staff maybe allowed use this software. As a result a user must login to the application. Figure 1 shows the desired layout of the login screen. The username and password can be displayed in clear text. <img src="./figure_1.png" width="650"> Figure 1 is shown when a user runs the program. If the user enters an incorrect username and/or password a message should appear informing them so. You will also need to add an input mask for the password so that asterisks replace the numbers or characters of the password when typed.|
 |REQ4|Once a user has successfully logged into the application the menu context will change. The menu should now display the following:|
 ||<table><tr><td>Level 1</td><td>File</td><td>Edit</td></tr><tr><td>Level 2</td><td>Exit</td><td>Create Account</td></tr><tr><td></td><td></td><td>Delete Account</td></tr><tr><td></td><td></td><td>Edit Account</td></tr><tr><td></td><td></td><td>Transfer</td></tr><tr><td></td><td></td><td>Withdraw</td></tr><tr><td></td><td></td><td>Deposit</td></tr><tr><td></td><td></td><td>View Transactions</td></tr></table>|
 ||Figure 2 below illustrates the updated menu.|
-||![sdfs](https://picsum.photos/800/450)|
+||<img src="./figure_2.png" width="650">|
 |REQ5|In addition to updating the menu upon a successfully login a grid should be displayed containing information relating to existing bank accounts. Figure 3 illustrates an example of how this should look.|
-||![sdfs](https://picsum.photos/800/450)|
+||<img src="./figure_3.png" width="650">|
 ||If no bank accounts exist then the grid should be empty. (i.e. contain no information)|
 |REQ6|A user must be able to create a new account. To do this they select the “Create Account” menu item under “Account” from the menu bar. A screen similar to that shown in Figure 4 should be displayed. The following data must be captured:|
-||![sdfs](https://picsum.photos/800/450)|
+||<img src="./figure_4.png" width="650">|
 ||<table><tr><th>Name<th>Description<th>Data type<tr><td>First Name<td>The first name of the owner of the bank account<td>String<tr><td>Last Name<td>The surname of the owner of the bank account<td>String<tr><td>Id Number<td>The new account number for the account<td>Int (3 digits)<tr><td>Balance<td>The current balance in the account<td>Int</table>|
 ||When a new account has been successfully added to the system, the grid displaying all the accounts in the system should be updated to include the newly added account.|
 |REQ7|The user of the application must be able to update/edit existing accounts. The screen to do this is similar to that shown in figure 4 with the following exception: The following fields should be read only. That is the user should not be able to modify the account balance using this screen.|
@@ -39,9 +56,9 @@ You can then add as many Python files as required in your project. And as many c
 |REQ9|The user should be able to transfer funds from one id to another. The destination id (id which funds are being transferred to). The following data must be captured to perform this task|
 ||<table><tr><th>Name<th>Description<th>Data type<tr><td>Source id<td>The id of the account which the funds will be transferred from<td>Int (3 digits)<tr><td>Destination id<td>The id of the account which the funds will be deposited<td>Int (3 digits)<tr><td>Date/Time of transfer<td>A system date time when the transfer has taken place<td>DateTime</table>|
 ||It should be noted that funds must be debited from the source id. Figure 5 illustrates the suggested layout for this screen.|
-||![sdfs](https://picsum.photos/800/450)|
+||<img src="./figure_5.png" width="650">|
 |REQ10|The system is expected to keep an audit of all funds entering and leaving an account id. Each time a deposit, withdrawal or transfer is made a transaction record should be recorded against all applicable accounts. The balance in the transactions table needs to reflect the current balance in relevant accounts and also in the accounts table. Figure 6 illustrates a suggested layout for the transactions associated with a particular account.|
-||![sdfs](https://picsum.photos/800/450)|
+||<img src="./figure_6.png" width="650">|
 
 - [ ] (a) Create four accounts of test data to test your app. [5 marks]
 
