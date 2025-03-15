@@ -21,6 +21,36 @@
   i {
     margin-inline: .25rem;
   }
+
+  @media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+    thead {
+        display: none; /* Hide table header */
+    }
+    tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    td {
+        display: flex;
+        justify-content: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+    td:last-child {
+        border-bottom: none;
+    }
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
+  }
+
+
 </style>
 
 <body>

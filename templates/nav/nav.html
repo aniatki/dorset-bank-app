@@ -7,10 +7,16 @@
   
     <div class="navbar-end">
       <div class="navbar-item">
+
+        {% if not user.is_authenticated %}
+
         {% if request.path == '/' %}
         <a class="button is-link" href="{% url 'signup_view' %}">Sign Up</a>
         {% elif request.path == '/signup/' %}
         <a class="button is-link" href="{% url 'login_view' %}">Log In</a>
+        {% endif %}
+        {% else %}
+        <p><a class="button is-danger" href="{% url 'logout' %}">Exit<i class="fas fa-sign-out-alt"></i></a></p>
         {% endif %}
       </div>
     </div>

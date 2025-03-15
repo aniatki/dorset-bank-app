@@ -5,15 +5,12 @@
 {% if user.is_authenticated %}
 
 <h5 class="subtitle" style="text-align:center">Logged in as <u>{{ user.username }}</u> at {{ user.last_login }}</h2>
-<section>
-    <div class="grid container is-max-tablet" style="display:flex; flex-wrap: wrap;">
-        <p style="margin-inline: auto;"><a class="button is-success" href="{% url 'create_view' %}">Create Account<i class="fas fa-plus"></i></a></p>
-        <p style="margin-inline: auto;"><a class="button is-warning" href="{% url 'transfer_view' %}">Transfer Funds<i class="fas fa-arrows-alt-h"></i></a></p>
-        <p style="margin-inline: auto;"><a class="button is-warning" href="{% url 'withdrawal_view' %}">Withdraw Funds<i class="fas fa-angle-double-down"></i></a></p>
-        <p style="margin-inline: auto;"><a class="button is-success" href="{% url 'deposit_view' %}">Deposit Funds<i class="fas fa-angle-double-up"></i></a></p>
-        <p style="margin-inline: auto;"><a class="button is-info" href="{% url 'view_transactions' %}">View Transactions<i class="fas fa-chart-line"></i></a></p>
-        <p style="margin-inline: auto;"><a class="button is-danger" href="{% url 'logout' %}">Exit<i class="fas fa-sign-out-alt"></i></a></p>
-    </div>
+<section class="grid" style="margin-inline: auto;">
+    <p style="margin-inline:.5rem"><a class="button is-dark" href="{% url 'create_view' %}">Create Account<i class="fas fa-plus"></i></a></p>
+    <p style="margin-inline:.5rem"><a class="button is-text" href="{% url 'transfer_view' %}">Transfer Funds<i class="fas fa-arrows-alt-h"></i></a></p>
+    <p style="margin-inline:.5rem"><a class="button is-text" href="{% url 'withdrawal_view' %}">Withdraw Funds<i class="fas fa-angle-double-down"></i></a></p>
+    <p style="margin-inline:.5rem"><a class="button is-text" href="{% url 'deposit_view' %}">Deposit Funds<i class="fas fa-angle-double-up"></i></a></p>
+    <p style="margin-inline:.5rem"><a class="button is-text" href="{% url 'view_transactions' %}">View Transactions<i class="fas fa-chart-line"></i></a></p>
 </section>
 {% include 'display/display.html' %}
 
