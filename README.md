@@ -1,10 +1,17 @@
+# Dorset Bank App
+### <a href="https://dorset-bank-app.onrender.com/">Click here to view the live site.</a>
+
+**Disclaimer: Due to the site being hosted in a free tier service, it may take about a minute to start up due to inactivity.**
+
+**If you're visiting the site on or after  April 9, 2025, the database will be deleted, which will cause the site to not be functional.**
+
 # Section 1
 
 |Task Description|Marks|
 |----------------|-----|
 |**Explain what a constructor is and when it is used in Python programming language? (5 marks) And give an example in code of this. (5 marks)**|10 Marks|
 |A constructor is the initialising function of a class, called ```__init__()```. This function creates an instance of the object with the parameters specified upon invokation. It takes in a number of arguments ```(self, *args, **kwargs)```.||
-|
+
 ```
 class Animal:
     def __init__(self, name, colour):
@@ -18,11 +25,104 @@ print(dog) # Buck Black
 |Task Description|Marks|
 |----------------|-----|
 |**When is inheritance used in OOP in Python? (6 marks) And give a code example (4 marks)**|10 Marks|
-|Inheritance is used when a class shares properties with another class||
+|Inheritance is used when a class shares properties from another class (parent class). Its main purpose is code reusability, in a concept known as DRY (Don't Repeat Yourself).||
+
+```
+class Animal:
+    def speak(self):
+        return "Animal speaks"
+
+class Dog(Animal):
+    def speak(self):
+        return "Bark"
+
+animal = Animal()
+dog = Dog()
+print(animal.speak()) # Animal speaks
+print(dog.speak()) # Bark
+```
+
+|Task Description|Marks|
+|----------------|-----|
 |**Define polymorphism (6 marks) and give a code example. (4 marks)**|10 Marks|
+|Polymorphism is the ability of different classes to have methods with the same name, but different implementations. One codeblock can be used in different circumstances.||
+
+```
+class Cat:
+    def speak(self):
+        return "Meow"
+
+class Cow:
+    def speak(self):
+        return "Moo"
+
+# Using polymorphism
+for instance in (Cat(), Cow()):
+    print(instance.speak())
+    #
+    # Meow
+    # Moo
+```
+
+|Task Description|Marks|
+|----------------|-----|
 |**What is a structural pattern in Python. (6 marks) And give an example of the adaptor and decorator. (4 marks)**|10 Marks|
+|A structural pattern is a design pattern that helps in composing classes and objects to form larger structures, ensuring flexibility and efficiency.||
+|The Adapter Pattern allows incompatible interfaces to work together by providing a wrapper.||
+
+```
+class EuropeanPlug:
+    def power_supply(self):
+        return "Using European power supply"
+
+class Adapter:
+    def __init__(self, plug):
+        self.plug = plug
+
+    def power_supply(self):
+        return self.plug.power_supply() + " with an adapter"
+
+european_plug = EuropeanPlug()
+adapter = Adapter(european_plug)
+print(adapter.power_supply())  
+
+# Using European power supply with an adapter
+
+```
+
+**Decorator Pattern Example:**
+The Decorator Pattern is used to dynamically extend the behaviour of an object without modifying its structure.
+
+```
+def decorator(func):
+    def wrapper():
+        print("Before function execution")
+        func()
+        print("After function execution")
+    return wrapper
+
+@decorator
+def say_hello():
+    print("Hello, World!")
+
+say_hello()
+
+# Before function execution
+# Hello, World!
+# After function execution
+
+```
+
+|Task Description|Marks|
+|----------------|-----|
 |**Define a name error in Python. (5 marks). Give a code example of a name error. (5 marks)**|10 Marks|
-|**Total:**|**100%**|
+|A ```NameError``` in Python happens when a variable is referenced before it is defined.||
+```
+print(my_name)
+# NameError: name 'my_name' is not defined.
+```
+**Total:**
+**100%**
 
 
 
@@ -60,7 +160,7 @@ You can then add as many Python files as required in your project. And as many c
 |REQ10|The system is expected to keep an audit of all funds entering and leaving an account id. Each time a deposit, withdrawal or transfer is made a transaction record should be recorded against all applicable accounts. The balance in the transactions table needs to reflect the current balance in relevant accounts and also in the accounts table. Figure 6 illustrates a suggested layout for the transactions associated with a particular account.|
 ||<img src="./figure_6.png" width="650">|
 
-- [ ] (a) Create four accounts of test data to test your app. [5 marks]
+- [x] (a) Create four accounts of test data to test your app. [5 marks]
 
 - [x] (b) Implement the project above in Python. [45 marks]
 
